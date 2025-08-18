@@ -6,3 +6,6 @@ bot = Bot(token=API_KEY)
 
 # Диспетчер для обработки апдейтов
 dp = Dispatcher()
+
+# активные игры по user_id
+active_games = {}

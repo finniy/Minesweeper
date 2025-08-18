@@ -49,17 +49,17 @@ class Game:
                                 count += 1
                     self.board[r][c].neighbours = count
 
-    def open_clear_cell(self, row: int, col: int) -> bool:
+    def open_clear_cell(self, row: int, col: int) -> bool | str:
         """Открывает клетку и рекурсивно соседние пустые."""
         # Перед вызовом проверка не бомба!
         cell = self.board[row][col]
         if cell.opened:
-            return False  # Уже открыта
+            return 'opened'  # Уже открыта
         cell.opened = True
 
         if cell.mine:
             self._game_over = True
-            return False
+            return 'blow'
 
         # Если это пустая клетка, открываем соседей
         if cell.neighbours == 0:
