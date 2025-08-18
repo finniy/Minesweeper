@@ -1,10 +1,24 @@
-from app.bot_instance import dp, bot
-from aiogram import types
-from aiogram.filters import Command
+from aiogram import filters
 
-@dp.message(Command("start"))
-async def start_command(message: types.Message):
-    await message.answer("Привет! Добро пожаловать в бота-сапёра 🧨")
+from app.handlers.start import start_command
+from app.handlers.game import handle_start_game
+from app.handlers.rules import handle_show_rules
+from app.handlers.home import home_handler
+from app.bot_instance import dp, bot
+
+
+def register_handlers(dp):
+    # Хендлер на команду /start
+    dp.message.register(start_command, filters.Command(commands=["start"]))
+
+    # Хендлеры на callback_data
+    dp.callback_query.register(handle_start_game, lambda c: c.data == "start_game")
+    dp.callback_query.register(handle_show_rules, lambda c: c.data == "show_rules")
+    dp.callback_query.register(home_handler, lambda c: c.data == "back_to_start")
+
+
+register_handlers(dp)
+
 
 async def main():
     await dp.start_polling(bot)
