@@ -1,6 +1,6 @@
 from aiogram.types import CallbackQuery
 
-from app.keyboards import START_KEYBOARD
+from app.utils.keyboards import START_KEYBOARD
 from app.messages.text import WELCOME_MESSAGE
 
 

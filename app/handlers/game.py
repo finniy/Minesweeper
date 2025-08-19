@@ -2,9 +2,10 @@ from aiogram import types
 
 from app.bot_instance import active_games
 from app.utils.game_logic import Game
+from app.logger import logger
 from app.utils.board import create_board
 from app.utils.key import generate_game_key
-from app.keyboards import HOME_KEYBOARD_GAME
+from app.utils.keyboards import HOME_KEYBOARD_GAME
 from app.messages.text import START_GAME_TEXT, GAME_OVER_TEXT, BLOW_TEXT, ALREADY_OPENED_TEXT, VICTORY_TEXT, \
     ALREADY_CREATED_GAME_TEXT, GAME_NOT_FOUND_TEXT
 
@@ -17,7 +18,7 @@ async def handle_start_game(callback: types.CallbackQuery) -> None:
     Отправляет сообщение с пустой доской.
     """
     user_id = callback.from_user.id
-    username = callback.from_user.username
+    username = callback.from_user.username or user_id
     game = Game(mines=10)
     game_key = generate_game_key()
 
@@ -37,6 +38,8 @@ async def handle_start_game(callback: types.CallbackQuery) -> None:
     )
     await callback.answer()
 
+    logger.info(f'Игра {game_key} запущена пользователем {username}')
+
 
 async def handle_open_cell(callback: types.CallbackQuery) -> None:
     """
@@ -54,8 +57,6 @@ async def handle_open_cell(callback: types.CallbackQuery) -> None:
         return
 
     game = game_data["game"]
-    user_id = game_data["user_id"]
-    username = game_data["username"]
 
     result = game.open_clear_cell(row, col)
 
@@ -70,6 +71,8 @@ async def handle_open_cell(callback: types.CallbackQuery) -> None:
             reply_markup=HOME_KEYBOARD_GAME
         )
         del active_games[game_key]
+
+        logger.info(f'Игра {game_key} окончена')
         return
 
     if result == 'opened':  # клетка уже открыта
@@ -95,3 +98,5 @@ async def handle_open_cell(callback: types.CallbackQuery) -> None:
             reply_markup=HOME_KEYBOARD_GAME
         )
         del active_games[game_key]
+
+        logger.info(f'Игра {game_key} окончена')

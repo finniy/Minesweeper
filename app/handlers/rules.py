@@ -1,6 +1,6 @@
 from aiogram import types
 
-from app.keyboards import HOME_KEYBOARD_MENU
+from app.utils.keyboards import HOME_KEYBOARD_MENU
 from app.messages.text import RULES_TEXT
 
 
