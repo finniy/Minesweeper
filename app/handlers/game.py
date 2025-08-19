@@ -6,8 +6,11 @@ from app.logger import logger
 from app.utils.board import create_board
 from app.utils.key import generate_game_key
 from app.utils.keyboards import HOME_KEYBOARD_GAME
+from app.database.players import PlayerDB
 from app.messages.text import START_GAME_TEXT, GAME_OVER_TEXT, BLOW_TEXT, ALREADY_OPENED_TEXT, VICTORY_TEXT, \
     ALREADY_CREATED_GAME_TEXT, GAME_NOT_FOUND_TEXT
+
+players_db = PlayerDB()
 
 
 async def handle_start_game(callback: types.CallbackQuery) -> None:
@@ -57,6 +60,7 @@ async def handle_open_cell(callback: types.CallbackQuery) -> None:
         return
 
     game = game_data["game"]
+    user_id = game_data["user_id"]
 
     result = game.open_clear_cell(row, col)
 
@@ -72,6 +76,8 @@ async def handle_open_cell(callback: types.CallbackQuery) -> None:
         )
         del active_games[game_key]
 
+        players_db.update_after_game(user_id, game.opened_cells_count, victory=False)
+
         logger.info(f'Игра {game_key} окончена')
         return
 
@@ -84,7 +90,6 @@ async def handle_open_cell(callback: types.CallbackQuery) -> None:
         START_GAME_TEXT,
         reply_markup=create_board(game, game_key)
     )
-
     await callback.answer()
 
     if game.check_victory():
@@ -97,6 +102,9 @@ async def handle_open_cell(callback: types.CallbackQuery) -> None:
             VICTORY_TEXT,
             reply_markup=HOME_KEYBOARD_GAME
         )
+
+        players_db.update_after_game(user_id, game.opened_cells_count, victory=True)
+
         del active_games[game_key]
 
         logger.info(f'Игра {game_key} окончена')

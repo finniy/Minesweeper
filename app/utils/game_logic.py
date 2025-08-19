@@ -18,6 +18,7 @@ class Game:
         self.rows = 8
         self.cols = 8
         self.mines = mines
+        self.opened_cells_count = 0
         self.board = [[Cell(r, c) for c in range(self.cols)] for r in range(self.rows)]
 
         # Методы
@@ -51,7 +52,6 @@ class Game:
 
     def open_clear_cell(self, row: int, col: int) -> bool | str:
         """Открывает клетку и рекурсивно соседние пустые."""
-        # Перед вызовом проверка не бомба!
         cell = self.board[row][col]
         if cell.opened:
             return 'opened'  # Уже открыта
@@ -73,6 +73,8 @@ class Game:
                     neighbour_cell = self.board[nr][nc]
                     if not neighbour_cell.opened and not neighbour_cell.mine:
                         self.open_clear_cell(nr, nc)  # рекурсивно открываем
+
+        self.opened_cells_count += 1
 
         return True
 
