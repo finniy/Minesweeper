@@ -2,7 +2,7 @@ from aiogram import types
 
 from app.game_logic import Game
 from app.bot_instance import active_games
-from app.keyboards import HOME_KEYBOARD
+from app.keyboards import HOME_KEYBOARD_GAME
 from app.utils.board import create_board
 from app.utils.key import generate_game_key
 
@@ -53,7 +53,7 @@ async def handle_open_cell(callback: types.CallbackQuery):
 
         await callback.message.answer(
             "💥 Бум! Ты подорвался на мине",
-            reply_markup=HOME_KEYBOARD
+            reply_markup=HOME_KEYBOARD_GAME
         )
         del active_games[game_key]
         return
@@ -78,6 +78,6 @@ async def handle_open_cell(callback: types.CallbackQuery):
 
         await callback.message.answer(
             "🎉 Поздравляем, вы выиграли!",
-            reply_markup=HOME_KEYBOARD
+            reply_markup=HOME_KEYBOARD_GAME
         )
         del active_games[game_key]

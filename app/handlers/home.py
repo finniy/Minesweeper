@@ -2,6 +2,7 @@ from aiogram.types import CallbackQuery
 
 from app.keyboards import START_KEYBOARD
 
+
 async def home_handler(callback: CallbackQuery) -> None:
     """
     Обработчик нажатия кнопки "🏠 Домой".

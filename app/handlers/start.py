@@ -1,6 +1,7 @@
 from aiogram import types
 from app.keyboards import START_KEYBOARD
 
+
 async def start_command(message: types.Message):
     await message.answer(
         "<Команда /start>",
