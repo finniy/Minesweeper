@@ -10,7 +10,6 @@ Minesweeper Telegram Bot — это игра в Сапер прямо в Telegra
 [![Python](https://img.shields.io/badge/Python-3.12+-blue?logo=python)](https://www.python.org/)
 [![Aiogram](https://img.shields.io/badge/Aiogram-async-blue?logo=telegram)](https://docs.aiogram.dev/)
 [![python-dotenv](https://img.shields.io/badge/dotenv-env%20config-green)](https://pypi.org/project/python-dotenv/)
-[![Random](https://img.shields.io/badge/Random-built--in-yellow)](https://docs.python.org/3/library/random.html)
 [![OS](https://img.shields.io/badge/OS-built--in-lightblue)](https://docs.python.org/3/library/os.html)
 [![Logging](https://img.shields.io/badge/Logging-built--in-grey)](https://docs.python.org/3/library/logging.html)
 
