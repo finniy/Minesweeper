@@ -1,9 +1,8 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-
 from app.game_logic import Game
 
 
-def create_board(game: Game):
+def create_board(game: Game, game_key: str):
     """Превращает поле в inline-кнопки."""
 
     keyboard = []
@@ -21,7 +20,10 @@ def create_board(game: Game):
             else:
                 text = "⬜"  # закрытая клетка
             row_buttons.append(
-                InlineKeyboardButton(text=text, callback_data=f"open_{row}_{col}")
+                InlineKeyboardButton(
+                    text=text,
+                    callback_data=f"open_{game_key}_{row}_{col}"
+                )
             )
         keyboard.append(row_buttons)
 
