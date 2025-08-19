@@ -4,9 +4,9 @@ def calculate_rating(cells_opened: int, victory: bool) -> int:
     """
 
     if victory:
-        points = cells_opened  # 1 очко за каждую безопасную клетку
-        points += 10  # бонус за победу
+        points = int(cells_opened * 0.5)  # 0.5 очко за каждую безопасную клетку
+        points += 15  # бонус за победу
     else:
-        points = -15  # штраф за проигрыш
+        points = -20  # штраф за проигрыш
 
     return points
