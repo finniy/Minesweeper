@@ -31,13 +31,24 @@ RULES_TEXT = """
 """
 
 START_GAME_TEXT = "Игра началась! 🎮"
+GAME_OVER_TEXT = "Игра окончена 🎮"
+
 BLOW_TEXT = "💥 Бум! Ты подорвался на мине"
 VICTORY_TEXT = "🎉 Поздравляем, вы выиграли!"
+
 ALREADY_OPENED_TEXT = "❗️Эта клетка уже открыта"
 ALREADY_CREATED_GAME_TEXT = "Вы уже создали игру ⚠️"
 GAME_NOT_FOUND_TEXT = "Игра окончена или не найдена ⚠️"
-GAME_OVER_TEXT = "Игра окончена 🎮"
 
 PLAYERS_EMPTY = "❌ Рейтинг пока пуст"
 RATING_HEADER = "🏅 Топ-10 игроков по рейтингу\n\n"
 RATING_LINE = "{pos}. @{username} — ⭐️ {elo}\n"
+
+STATS_TEXT = (
+    "📊 Ваша статистика:\n\n"
+    "🎮 Игр сыграно: {games_played}\n"
+    "🏆 Побед: {wins}\n"
+    "💀 Поражений: {losses}\n"
+    "⭐️ Рейтинг: {elo_rating}"
+)
+NO_STATS = "❌ У вас пока нет статистики"
