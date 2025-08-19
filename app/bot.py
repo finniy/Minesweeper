@@ -1,13 +1,17 @@
 from aiogram import filters
+from aiogram import Dispatcher
 
+from app.bot_instance import dp, bot
 from app.handlers.start import start_command
 from app.handlers.game import handle_start_game, handle_open_cell
 from app.handlers.rules import handle_show_rules
 from app.handlers.home import home_handler
-from app.bot_instance import dp, bot
 
 
-def register_handlers(dp):
+def register_handlers(dp: Dispatcher) -> None:
+    """
+    Регистрирует все хендлеры бота.
+    """
     # Хендлер на команду /start
     dp.message.register(start_command, filters.Command(commands=["start"]))
 
@@ -21,5 +25,8 @@ def register_handlers(dp):
 register_handlers(dp)
 
 
-async def main():
+async def main() -> None:
+    """
+    Запускает бота и начинает опрос Telegram API.
+    """
     await dp.start_polling(bot)

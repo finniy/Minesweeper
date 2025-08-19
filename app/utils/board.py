@@ -1,10 +1,15 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from app.game_logic import Game
+
+from app.utils.game_logic import Game
 
 
-def create_board(game: Game, game_key: str, win: bool = False):
-    """Превращает поле в inline-кнопки."""
-
+def create_board(game: Game, game_key: str, win: bool = False) -> InlineKeyboardMarkup:
+    """
+    Преобразует игровое поле Сапера в InlineKeyboardMarkup для Telegram.
+    Каждая клетка представлена кнопкой:
+    💥 — мина, число — количество мин вокруг, ⬜ — закрытая клетка.
+    При победе все клетки открываются.
+    """
     keyboard = []
     for row in range(game.rows):
         row_buttons = []

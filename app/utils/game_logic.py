@@ -77,6 +77,9 @@ class Game:
         return True
 
     def check_victory(self) -> bool:
+        """
+        Проверяет, выиграл ли игрок.
+        """
         count_closed = 0
         for row in self.board:
             for cell in row:
