@@ -47,7 +47,7 @@ async def handle_open_cell(callback: types.CallbackQuery):
 
     if result == 'blow':
         await callback.message.edit_text(
-            "Игра продолжается 🎮",
+            "Игра окончена 🎮",
             reply_markup=create_board(game, game_key)
         )
 
@@ -69,3 +69,15 @@ async def handle_open_cell(callback: types.CallbackQuery):
     )
 
     await callback.answer()
+
+    if game.check_victory():
+        await callback.message.edit_text(
+            "Игра окончена 🎮",
+            reply_markup=create_board(game, game_key, True)
+        )
+
+        await callback.message.answer(
+            "🎉 Поздравляем, вы выиграли!",
+            reply_markup=HOME_KEYBOARD
+        )
+        del active_games[game_key]

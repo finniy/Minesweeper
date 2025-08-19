@@ -75,3 +75,13 @@ class Game:
                         self.open_clear_cell(nr, nc)  # рекурсивно открываем
 
         return True
+
+    def check_victory(self) -> bool:
+        count_closed = 0
+        for row in self.board:
+            for cell in row:
+                if not cell.opened:
+                    count_closed += 1
+        if count_closed == self.mines:
+            return True
+        return False

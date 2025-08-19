@@ -2,7 +2,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from app.game_logic import Game
 
 
-def create_board(game: Game, game_key: str):
+def create_board(game: Game, game_key: str, win: bool = False):
     """Превращает поле в inline-кнопки."""
 
     keyboard = []
@@ -10,7 +10,7 @@ def create_board(game: Game, game_key: str):
         row_buttons = []
         for col in range(game.cols):
             cell = game.board[row][col]
-            if cell.opened:
+            if cell.opened or win:
                 if cell.mine:
                     text = "💥"
                 elif cell.neighbours > 0:
