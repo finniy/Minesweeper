@@ -6,6 +6,7 @@ from app.handlers.start import start_command
 from app.handlers.game import handle_start_game, handle_open_cell
 from app.handlers.rules import handle_show_rules
 from app.handlers.home import home_handler
+from app.handlers.rating import rating_handler
 
 
 def register_handlers(dp: Dispatcher) -> None:
@@ -20,6 +21,7 @@ def register_handlers(dp: Dispatcher) -> None:
     dp.callback_query.register(handle_open_cell, lambda c: c.data.startswith("open_"))
     dp.callback_query.register(handle_show_rules, lambda c: c.data == "show_rules")
     dp.callback_query.register(home_handler, lambda c: c.data == "back_to_start")
+    dp.callback_query.register(rating_handler, lambda c: c.data == "rating")
 
 
 register_handlers(dp)

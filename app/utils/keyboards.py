@@ -3,15 +3,17 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 # Стартовая клавиатура
 START_KEYBOARD = InlineKeyboardMarkup(
     inline_keyboard=[
-        [InlineKeyboardButton(text="🎮 Начать игру", callback_data="start_game")],
-        [InlineKeyboardButton(text="📖 Правила", callback_data="show_rules")]
+        [InlineKeyboardButton(text="▶️ Играть", callback_data="start_game")],
+        [InlineKeyboardButton(text="📖 Правила", callback_data="show_rules")],
+        [InlineKeyboardButton(text="👤 Профиль", callback_data="profile")],
+        [InlineKeyboardButton(text="🏆 Рейтинг", callback_data="rating")]
     ]
 )
 
 # Клавиатура с кнопкой "Домой" для меню
 HOME_KEYBOARD_MENU = InlineKeyboardMarkup(
     inline_keyboard=[
-        [InlineKeyboardButton(text="🎮 Начать игру", callback_data="start_game")],
+        [InlineKeyboardButton(text="▶️ Играть", callback_data="start_game")],
         [InlineKeyboardButton(text="🏠 Домой", callback_data="back_to_start")]
     ]
 )
