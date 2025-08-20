@@ -65,7 +65,6 @@ class Game:
                     c = random.randint(0, self.cols - 1)
                     if not self.board[r][c].mine and (r, c) != (row, col):
                         self.board[r][c].mine = True
-                        print('Yes')
                         break
 
                 self._calculate_neighbours()
