@@ -25,6 +25,7 @@ class Game:
         self._place_mines(self.mines)
         self._calculate_neighbours()
         self._game_over = False
+        self.first_move = True
 
     def _place_mines(self, count_bombs: int) -> None:
         """Случайно расставляет мины на поле."""
@@ -53,6 +54,22 @@ class Game:
     def open_clear_cell(self, row: int, col: int) -> bool | str:
         """Открывает клетку и рекурсивно соседние пустые."""
         cell = self.board[row][col]
+
+        # Защита от первой мины
+        if self.first_move:
+            self.first_move = False
+            if cell.mine:
+                cell.mine = False
+                while True:
+                    r = random.randint(0, self.rows - 1)
+                    c = random.randint(0, self.cols - 1)
+                    if not self.board[r][c].mine and (r, c) != (row, col):
+                        self.board[r][c].mine = True
+                        print('Yes')
+                        break
+
+                self._calculate_neighbours()
+
         if cell.opened:
             return 'opened'  # Уже открыта
         cell.opened = True

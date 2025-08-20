@@ -25,10 +25,9 @@ async def handle_start_game(callback: types.CallbackQuery) -> None:
     game = Game(mines=10)
     game_key = generate_game_key()
 
-    if any(user_id == val[0] for val in active_games.values()):
+    if any(user_id == val["user_id"] for val in active_games.values()):
         await callback.answer(ALREADY_CREATED_GAME_TEXT)
         return
-
     active_games[game_key] = {
         "user_id": user_id,
         "username": username,
