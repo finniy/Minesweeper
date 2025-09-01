@@ -21,7 +21,7 @@ async def handle_start_game(callback: types.CallbackQuery) -> None:
     Отправляет сообщение с пустой доской.
     """
     user_id = callback.from_user.id
-    username = callback.from_user.username or user_id
+    username = callback.from_user.username or str(callback.from_user.id)
     game = Game(mines=10)
     game_key = generate_game_key()
 

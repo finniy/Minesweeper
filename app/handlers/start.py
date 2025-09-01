@@ -15,7 +15,7 @@ async def start_command(message: types.Message) -> None:
     Прикрепляет клавиатуру START_KEYBOARD для дальнейших действий.
     """
     user_id = message.from_user.id
-    username = message.from_user.username or user_id
+    username = message.from_user.username or str(user_id)
 
     players_db.add_or_update_player(user_id=user_id, username=username)
 
